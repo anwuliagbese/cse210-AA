@@ -4,13 +4,15 @@ using System.IO;
 
 public class Journal
 {
-    private List<Entry> _entries = new List<Entry>();
-
-    public void AddEntry(string prompt, string response, string date)
+    private List<Entry> _entries;
+    public Journal()
     {
-        _entries.Add(new Entry(prompt, response, date));
+        _entries = new List<Entry>();
     }
-
+public void AddEntry(Entry entry)
+    {
+        _entries.Add(entry);
+    }
     public void Display()
     {
         foreach (var entry in _entries)
@@ -25,9 +27,12 @@ public class Journal
         {
             foreach (var entry in _entries)
             {
-                writer.WriteLine($"{entry.Date}|{entry.Prompt}|{entry.Response}");
+                string tags = string.Join(",", entry.Tags);
+                writer.WriteLine($"{entry.Date}|{entry.Prompt}|{entry.Response}|{entry.Mood}|{tags}|{entry.Location}");
+
             }
         }
+        Console.WriteLine("Journal saved successfully!");
     }
 
     public void LoadFromFile(string filename)
@@ -39,18 +44,19 @@ public class Journal
             foreach (string line in lines)
             {
                 string[] parts = line.Split('|');
-                if (parts.Length == 3)
-                {
-                    string date = parts[0];
-                    string prompt = parts[1];
-                    string response = parts[2];
-                    _entries.Add(new Entry(prompt, response, date));
-                }
-            }
+                Entry entry = new Entry
+            {
+                Date = parts[0],
+                Prompt = parts[1],
+                Response = parts[2],
+                Mood = int.Parse(parts[3]),
+                Tags = new List<string>(parts[4].Split(',')),
+                Location = parts[5]
+            };
+            _entries.Add(entry);
         }
-        else
-        {
-            Console.WriteLine("File not found.");
-        }
+        Console.WriteLine("Journal loaded successfully!");
     }
 }
+}
+    
