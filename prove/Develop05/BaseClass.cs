@@ -1,21 +1,21 @@
 public abstract class Activity
 {
-    private string name;
-    private string description;
-    private int duration;
+    private string _name;
+    private string _description;
+    private int _duration;
 
     public Activity(string name, string description)
     {
-        this.name = name;
-        this.description = description;
+        _name = name;
+        _description = description;
     }
 
     public void DisplayStartMessage()
     {
-        Console.WriteLine($"Welcome to the {name}!");
-        Console.WriteLine(description);
+        Console.WriteLine($"Welcome to the {_name}!");
+        Console.WriteLine(_description);
         Console.Write("Enter the duration of the activity in seconds: ");
-        duration = int.Parse(Console.ReadLine());
+        _duration = int.Parse(Console.ReadLine());
         Console.WriteLine("Prepare to begin...");
         ShowSpinner(3);
     }
@@ -24,7 +24,7 @@ public abstract class Activity
     {
         Console.WriteLine("Well done!");
         ShowSpinner(3);
-        Console.WriteLine($"You have completed the {name} for {duration} seconds.");
+        Console.WriteLine($"You have completed the {_name} for {_duration} seconds.");
     }
 
     protected void ShowSpinner(int seconds)
@@ -43,6 +43,6 @@ public abstract class Activity
         }
     }
 
-    public int GetDuration() => duration;
+    public int GetDuration() => _duration;
     public abstract void PerformActivity();
 }
