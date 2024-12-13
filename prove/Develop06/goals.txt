@@ -1,0 +1,6 @@
+Player1
+0
+SimpleGoal|SimpleGoal|Temple Trip|I will visit the temple regularly.|100|False
+SimpleGoal|SimpleGoal|Scripture study|I will study my scriptures regularly.|100|False
+EternalGoal|EternalGoal|Give a talk|I will give a talk during sacrament meeting.|50
+ChecklistGoal|ChecklistGoal|Choir rehearsals|I will attend choir rehearsals regularly.|100|0|50|500
